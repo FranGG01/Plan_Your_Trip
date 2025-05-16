@@ -10,13 +10,22 @@ const categorias = [
 ];
 
 function MultiDropdown() {
-  return (
-    <div className="multi-dropdown-container">
-      {categorias.map((categoria) => (
-        <DropdownList key={categoria} categoria={categoria} />
-      ))}
-    </div>
-  );
+  const [openCategory, setOpenCategory] = useState(null);
+  const toggleCategory = (categoria) => {
+    setOpenCategory((prev) => (prev === categoria ? null : categoria));
+    return (
+      <div className="multi-dropdown-container">
+        {categorias.map((categoria) => (
+          <DropdownList
+            key={categoria}
+            categoria={categoria}
+            isOpen={openCategory === categoria}
+            toggleCategory={toggleCategory}
+          />
+        ))}
+      </div>
+    );
+  };
 }
 
 export default MultiDropdown;
