@@ -6,7 +6,6 @@
   --black: #222;
 }
 
-
 .multi-dropdown-container {
   max-width: 33rem;
   margin: 1rem auto;
@@ -110,4 +109,57 @@
   border-radius: 0.625rem;
   font-weight: bold;
   cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .multi-dropdown-container {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .mydropdown-container {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 0.4rem;
+  }
+
+  .mydropdown-header {
+    font-size: 0.6rem;
+    height: 2.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .mydropdown-arrow {
+    font-size: 0.85rem;
+  }
+
+  .mydropdown-content {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .mydropdown-task-item {
+    padding: 0.3rem 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.4rem;
+  }
+
+  .mydropdown-text {
+    font-size: 0.75rem;
+  }
+
+  .mydropdown-delete-button {
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+  }
+
+  .mydropdown-add-task input {
+    font-size: 0.75rem;
+    padding: 0.4rem;
+  }
+
+  .mydropdown-add-task button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 0.4rem;
+  }
 }
