@@ -13,10 +13,12 @@
   padding: 0 1rem;
   height: 3.125rem;
   max-width: 600px;
+  width: 100%;
   box-sizing: border-box;
   position: relative;
   gap: 1rem;
-  overflow: hidden; 
+  overflow: visible; 
+  margin: 0 auto;
 }
 
 .menu-button {

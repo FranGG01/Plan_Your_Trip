@@ -1,4 +1,9 @@
-html {
+html, body {
+	width: 100%;
+	min-height: 100%;
+	margin: 0 auto;
+	padding: 0;
+	overflow-x: auto;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 16px;
 	font-smooth: auto;
@@ -8,27 +13,7 @@ html {
 }
 
 body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	background: var(--primary-color);
-	transition: background 0.5s ease;
-}
-html {
-	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 16px;
-	font-smooth: auto;
-	font-weight: 300;
-	line-height: 1.5;
-	color: #444;
-}
-
-body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
+	display: block;
 	background: var(--primary-color);
 	transition: background 0.5s ease;
 }
