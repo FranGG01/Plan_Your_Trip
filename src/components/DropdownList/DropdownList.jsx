@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import "./DropdownList.css";
 
+
+
+
 function DropdownList({ categoria = "Alojamiento", isOpen, toggleCategory }) {
   const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState("");
+
+
+  useEffect(() => {
+    fetch("https://jubilant-space-barnacle-4jwjg7qwr9xpf577g-3000.app.github.dev/tasks")
+      .then((res) => res.json())
+      .then((data) => {
+        setTasks(data.filter((task) => task.categoria === categoria))
+      })
+      .catch(() => console.log("ERROR"))
+  }, [categoria]);
+
 
   const handleAddTask = () => {
     if (taskInput.trim() === "") return;
@@ -15,21 +29,58 @@ function DropdownList({ categoria = "Alojamiento", isOpen, toggleCategory }) {
       id: Date.now(),
       text: taskInput,
       done: false,
+      categoria,
     };
-    setTasks([newTask, ...tasks]);
-    setTaskInput("");
+
+    fetch("https://jubilant-space-barnacle-4jwjg7qwr9xpf577g-3000.app.github.dev/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTask),
+    })
+      .then((res) => res.json())
+      .then((savedTask) => {
+        setTasks([savedTask, ...tasks]);
+        setTaskInput("");
+      })
+      .catch(() => console.log("ERROR"))
   };
 
   const handleDeleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    fetch(`https://jubilant-space-barnacle-4jwjg7qwr9xpf577g-3000.app.github.dev/tasks/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setTasks(tasks.filter((task) => task.id !== id));
+      })
+      .catch(() => console.log("ERROR"))
   };
 
   const handleToggleDone = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, done: !task.done } : task
-      )
-    );
+
+    const filteredTasks = tasks.filter((task) => task.id === id);
+    if(filteredTasks.length === 0) return;
+
+    const taskToUpdate = filteredTasks[0];
+    const updatedTask = { ...taskToUpdate, done: !taskToUpdate.done };
+
+
+    fetch(`https://jubilant-space-barnacle-4jwjg7qwr9xpf577g-3000.app.github.dev/tasks/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedTask),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setTasks(
+          tasks.map((task) =>
+            task.id === id ? updatedTask : task
+          )
+        );
+      })
+      .catch(() => console.log("ERROR"))
+
+
   };
 
   return (
