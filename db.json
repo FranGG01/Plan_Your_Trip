@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "text": "Reservar hotel",
+      "done": false,
+      "categoria": "Alojamiento"
+    },
+    {
+      "id": 2,
+      "text": "Buscar hostal",
+      "done": true,
+      "categoria": "Alojamiento"
+    },
+    {
+      "id": 3,
+      "text": "Sacar entradas al museo",
+      "done": false,
+      "categoria": "Actividades"
+    }
+  ]
+}
